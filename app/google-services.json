@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "695855703275",
+    "project_id": "policy-reminder-4bbaf",
+    "storage_bucket": "policy-reminder-4bbaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695855703275:android:5dc73f739054cdc5304aae",
+        "android_client_info": {
+          "package_name": "com.policyreminder.policyreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695855703275-dksh0iqhqqnn7fkvtnadou7vp5ruf6eo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYBryzqktO05dh35wNBG7b99hTQGQyZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695855703275-dksh0iqhqqnn7fkvtnadou7vp5ruf6eo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/home_main"
+        android:title="Home"
+        android:iconTint="@color/grey"
+        android:icon="@drawable/ic_baseline_home_24"/>
+
+
+    <item android:id="@+id/customer_main"
+        android:title="Customer"
+        android:iconTint="@color/grey"
+        android:icon="@drawable/ic_baseline_people_24"/>
+
+
+    <item android:id="@+id/policy_main"
+        android:title="Policy"
+        android:iconTint="@color/grey"
+        android:icon="@drawable/ic_baseline_policy_24"/>
+
+
+    <item android:id="@+id/profile_main"
+        android:title="Profile"
+        android:iconTint="@color/grey"
+        android:icon="@drawable/ic_baseline_person_24"/>
+
+
+
+</menu>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="black2">#110101</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+
+
+    <color name="color_primary">#FF000000</color>
+    <color name="color_secondary">#f0c136</color>
+    <color name="grey">#adadad</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent2">#9E000000</color>
+    <color name="red">#ff0000</color>
+    <color name="light_black">#1c1c1c</color>
+    <color name="yellow">#eaae01</color>
+    <color name="black_light">#66000000</color>
+    <color name="yellow_dark">#915c00</color>
+    <color name="light_white">#d2d2d2</color>
+    <color name="to_light_white">#99FFFFFF</color>
+    <color name="to_light_white2">#72FFFFFF</color>
+    <color name="to_light_white3">#C4FFFFFF</color>
+    <color name="dark_yellow">#866800</color>
+    <color name="orange">#ff7811</color>
+    <color name="whitetrans">#86FFFFFF</color>
+    <color name="orange3">#F90000</color>
+    <color name="orange5">#FF0000</color>
+    <color name="yellow_light">#ff9c4b</color>
+    <color name="red_light">#ff5d4d</color>
+    <color name="brawn">#a04206</color>
+    <color name="orange_dark_1">#dd6b00</color>
+    <color name="orange_dark_2">#874100</color>
+    <color name="light_brawn">#d45f00</color>
+    <color name="light_grey">#DFDFDF</color>
+
+</resources>
