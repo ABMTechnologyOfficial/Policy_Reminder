@@ -20,7 +20,7 @@ public class Session {
     private static final String LOGEDOUT = "logedout";
 
     private Context _context;
-    private SharedPreferences sharedPreferences;
+    public SharedPreferences sharedPreferences;
     private SharedPreferences.Editor  editor;
     Session session;
 

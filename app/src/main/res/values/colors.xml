@@ -39,4 +39,12 @@
     <color name="light_brawn">#d45f00</color>
     <color name="light_grey">#DFDFDF</color>
 
+    <color name="light_gray">#a3acbe</color>
+    <color name="lighter_gray">#CBCBCB</color>
+    <color name="nav_parent_title">#310850</color>
+    <color name="view_divider">#E0DEDE</color>
+    <color name="primary_light">#F6FCFF</color>
+    <color name="dark_gray">#5E5E5E</color>
+    <color name="blue">#8B4AFF</color>
+
 </resources>
