@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     Session session;
     FirebaseDatabase firebaseDatabase ;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +65,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(activity, "Login Success", Toast.LENGTH_SHORT).show();
                 session.setUserId(authResult.getUser().getUid());
-                startActivity(new Intent(activity, HomeActivity.class));
+                startActivity(new Intent(activity, HomeActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 progressDialog.dismiss();
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -87,9 +89,13 @@ public class LoginActivity extends AppCompatActivity {
                             firebaseDatabase.getReference().child("users").child(authResult.getUser().getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    startActivity(new Intent(activity, HomeActivity.class));
+                                    startActivity(new Intent(activity, HomeActivity.class)
+                                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    );
                                     Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
+                                    finish();
                                 }
                             });
 

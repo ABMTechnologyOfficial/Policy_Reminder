@@ -83,6 +83,12 @@ public class HomeActivity extends AppCompatActivity {
             binding.drawerLayout.close();
         });
 
+
+       binding.navPolicyrLay.setOnClickListener(v -> {
+           startActivity(new Intent(activity, AddPolicyActivity.class));
+            binding.drawerLayout.close();
+        });
+
     }
 
     public void loadFrag(Fragment fragment) {

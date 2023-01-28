@@ -10,7 +10,6 @@
     tools:openDrawer="start"
     tools:context=".Activities.HomeActivity">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -264,11 +263,11 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@id/ic7"
+                        android:drawableRight="@drawable/ic_arrow_next"
                         android:fontFamily="@font/poppins_regular"
                         android:paddingHorizontal="@dimen/_20sdp"
                         android:paddingVertical="@dimen/_10sdp"
                         android:text="Holders"
-                        android:drawableRight="@drawable/ic_arrow_next"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_11sdp"
                         app:drawableTint="@color/yellow" />
@@ -288,6 +287,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:background="@color/view_divider" />
+
+
+                <RelativeLayout
+                    android:id="@+id/nav_policyr_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:paddingVertical="@dimen/_5sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/ic23"
+                        android:drawableRight="@drawable/ic_arrow_next"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingHorizontal="@dimen/_20sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:text="Policy"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp"
+                        app:drawableTint="@color/yellow" />
+
+                    <ImageView
+                        android:id="@+id/ic23"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:src="@drawable/ic_baseline_policy_24"
+                        app:tint="@color/lighter_gray" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/view_divider" />
+
 
             </LinearLayout>
 
