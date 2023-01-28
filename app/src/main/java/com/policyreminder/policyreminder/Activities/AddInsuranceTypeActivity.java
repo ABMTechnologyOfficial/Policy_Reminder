@@ -26,7 +26,6 @@ public class AddInsuranceTypeActivity extends AppCompatActivity {
     private  AddInsuranceTypeActivity activity ;
     private FirebaseDatabase database ;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

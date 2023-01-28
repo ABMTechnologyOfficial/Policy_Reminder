@@ -23,11 +23,11 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    ActivityLoginBinding binding ;
-    LoginActivity activity ;
-    FirebaseAuth auth ;
+    ActivityLoginBinding binding;
+    LoginActivity activity;
+    FirebaseAuth auth;
     Session session;
-    FirebaseDatabase firebaseDatabase ;
+    FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,73 +43,56 @@ public class LoginActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         binding.loginBtn.setOnClickListener(view -> {
-            if(binding.edtEmail.getText().toString().equalsIgnoreCase("")){
+            if (binding.edtEmail.getText().toString().equalsIgnoreCase("")) {
                 binding.edtEmail.setError("Enter email");
                 binding.edtEmail.requestFocus();
-            }else if(binding.edtPassword.getText().toString().equalsIgnoreCase("")){
+            } else if (binding.edtPassword.getText().toString().equalsIgnoreCase("")) {
                 binding.edtPassword.setError("Enter Password");
                 binding.edtPassword.requestFocus();
-            }else{
+            } else {
                 loginUser(binding.edtEmail.getText().toString(), binding.edtPassword.getText().toString());
             }
         });
     }
 
-    private  void loginUser(String email , String password ){
+    private void loginUser(String email, String password) {
 
         ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.show();
 
-        auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(activity, "Login Success", Toast.LENGTH_SHORT).show();
-                session.setUserId(authResult.getUser().getUid());
-                startActivity(new Intent(activity, HomeActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                progressDialog.dismiss();
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-              if(e.getLocalizedMessage().contains("no user record")){
-                    auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            session.setUserId(authResult.getUser().getUid());
+        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+            Toast.makeText(activity, "Login Success", Toast.LENGTH_SHORT).show();
+            session.setUserId(authResult.getUser().getUid());
+            startActivity(new Intent(activity, HomeActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            progressDialog.dismiss();
+            finish();
+        }).addOnFailureListener(e -> {
+            if (e.getLocalizedMessage().contains("no user record")) {
+                auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+                    session.setUserId(authResult.getUser().getUid());
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("user_id", authResult.getUser().getUid());
+                    map.put("user_name", "");
+                    map.put("email", email);
+                    map.put("password", password);
+                    map.put("profile_status", "0");
 
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("user_id",authResult.getUser().getUid());
-                            map.put("user_name","");
-                            map.put("email",email);
-                            map.put("password",password);
-
-                            firebaseDatabase.getReference().child("users").child(authResult.getUser().getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    startActivity(new Intent(activity, HomeActivity.class)
-                                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    );
-                                    Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
-                                    finish();
-                                }
-                            });
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                        }
+                    firebaseDatabase.getReference().child("users").child(authResult.getUser().getUid()).setValue(map).addOnSuccessListener(unused -> {
+                        startActivity(new Intent(activity, UserDetailsActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        );
+                        Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        finish();
                     });
-              }else {
-                  progressDialog.dismiss();
-                  Toast.makeText(activity, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-              }
+
+                }).addOnFailureListener(e1 -> progressDialog.dismiss());
+            } else {
+                progressDialog.dismiss();
+                Toast.makeText(activity, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -61,6 +61,8 @@ public class AddPolicyActivity extends AppCompatActivity {
 
         binding.policyStartdate.setOnClickListener(view -> selectDate(binding.policyStartdate));
 
+       binding.policyEnddate.setOnClickListener(view -> selectDate(binding.policyEnddate));
+
         binding.backBtn.setOnClickListener(view -> finish());
 
         binding.companyAddBtn.setOnClickListener(view -> {
@@ -85,6 +87,7 @@ public class AddPolicyActivity extends AppCompatActivity {
         map.put("sum_insured", binding.policySunInsured.getText().toString());
         map.put("premium", binding.policyPremium.getText().toString());
         map.put("start_date", binding.policyStartdate.getText().toString());
+        map.put("end_date", binding.policyEnddate.getText().toString());
         map.put("duration", binding.policyDuration.getText().toString());
         map.put("plan_ncb_number", binding.policyNcbVehicle.getText().toString());
 

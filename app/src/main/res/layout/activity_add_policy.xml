@@ -212,6 +212,18 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/light_white" />
 
+
+               <TextView
+                    android:id="@+id/policy_enddate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_background"
+                    android:text="Start Date"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/light_white" />
+
                 <EditText
                     android:id="@+id/policy_duration"
                     android:layout_width="match_parent"
