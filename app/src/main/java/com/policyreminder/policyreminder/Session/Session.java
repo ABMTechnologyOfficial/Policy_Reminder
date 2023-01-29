@@ -15,6 +15,7 @@ public class Session {
     private static final String UserId = "user_id";
     private static final String User_name = "user_name";
     private static final String Pro_Image = "pro_img";
+    private static final String profile_status = "profile_status";
     private static final String role_ = "user_role";
     private static final String LOGEDIN = "logedIn";
     private static final String LOGEDOUT = "logedout";
@@ -54,6 +55,12 @@ public class Session {
         this.editor.apply();
     }
 
+    public void setProfile_status(String userId) {
+        editor.putString(profile_status, userId);
+        this.editor.apply();
+    }
+
+
     public void set_role(String role) {
         editor.putString(role_, role);
         editor.apply();
@@ -67,6 +74,11 @@ public class Session {
 
     public String getUserId() {
         return sharedPreferences.getString(UserId, "");
+    }
+
+
+    public String getProfile_status() {
+        return sharedPreferences.getString(profile_status, "");
     }
 
 

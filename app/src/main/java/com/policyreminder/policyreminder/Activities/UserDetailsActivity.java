@@ -61,7 +61,9 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         });
 
+
         binding.skip.setOnClickListener(view -> {
+            session.setProfile_status("0");
             startActivity(new Intent(activity,HomeActivity.class));
             finish();
         });
@@ -84,6 +86,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 .updateChildren(map)
                 .addOnSuccessListener(unused -> {
                     pd.dismiss();
+                    session.setProfile_status("1");
                     Toast.makeText(activity, "Details Updated Success", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(activity,HomeActivity.class));
                     finish();
