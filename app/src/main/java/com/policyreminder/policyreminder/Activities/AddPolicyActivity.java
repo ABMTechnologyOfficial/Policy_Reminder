@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -26,8 +27,14 @@ import com.policyreminder.policyreminder.R;
 import com.policyreminder.policyreminder.Session.Session;
 import com.policyreminder.policyreminder.databinding.ActivityAddPolicyBinding;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +74,41 @@ public class AddPolicyActivity extends AppCompatActivity {
 
         binding.companyAddBtn.setOnClickListener(view -> {
             if (isValidate())
-                addPolicy();
+              addPolicy();
         });
 
     }
 
     private void addPolicy() {
+
+        String string = binding.policyStartdate.getText().toString();
+        Log.e("TAG", "addPolicy() called Start date "+binding.policyStartdate.getText().toString());
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date dt = null;
+        try {
+            dt = sdf .parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+
+        Log.e("TAG", "addPolicy() called Selected Cycle "+selectedPaymentCycle);
+
+        if(selectedPaymentCycle.equalsIgnoreCase("Monthly")){
+            c.add(Calendar.MONTH, 1);
+        }else if(selectedPaymentCycle.equalsIgnoreCase("Quaterly")){
+            c.add(Calendar.MONTH, 3);
+        } else if(selectedPaymentCycle.equalsIgnoreCase("Half Yearly")){
+            c.add(Calendar.MONTH, 6);
+        }else if(selectedPaymentCycle.equalsIgnoreCase("Yearly")){
+            c.add(Calendar.MONTH, 12);
+        }
+
+        String firstDate = sdf.format(c.getTime());
+        System.out.println(firstDate);
+        Log.e("TAG", "onCreate() called with: firstDate = [" + firstDate + "]");
+
 
         ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.show();
@@ -80,15 +116,20 @@ public class AddPolicyActivity extends AppCompatActivity {
         String policy_id = database.getReference().push().getKey();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id", selectedInsuranceType);
+        map.put("user_id", session.getUserId());
         map.put("insurance_type", selectedInsuranceType);
         map.put("company", selectedCompanyName);
+        map.put("policy_name", binding.policyName.getText().toString());
         map.put("payment_cycle", selectedPaymentCycle);
         map.put("sum_insured", binding.policySunInsured.getText().toString());
         map.put("premium", binding.policyPremium.getText().toString());
         map.put("start_date", binding.policyStartdate.getText().toString());
         map.put("end_date", binding.policyEnddate.getText().toString());
         map.put("duration", binding.policyDuration.getText().toString());
+        map.put("policy_status", "0");
+        map.put("policy_id", policy_id);
+        map.put("payment_status", "0");
+        map.put("next_payment_date", firstDate);
         map.put("plan_ncb_number", binding.policyNcbVehicle.getText().toString());
 
         database.getReference().child("policy").child(session.getUserId())
@@ -123,6 +164,9 @@ public class AddPolicyActivity extends AppCompatActivity {
             return false;
         } else if (binding.policyDuration.getText().toString().equalsIgnoreCase("")) {
             Snackbar.make(binding.coordinator, "Policy Duration Empty..!", Snackbar.LENGTH_LONG).show();
+            return false;
+        }else if (binding.policyName.getText().toString().equalsIgnoreCase("")) {
+            Snackbar.make(binding.coordinator, "Policy Name  Empty..!", Snackbar.LENGTH_LONG).show();
             return false;
         } else if (binding.policySunInsured.getText().toString().equalsIgnoreCase("")) {
             Snackbar.make(binding.coordinator, "Policy Sum Insured Empty..!", Snackbar.LENGTH_LONG).show();
@@ -209,7 +253,7 @@ public class AddPolicyActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, paymentCycleList);
         binding.paymentCycleSpi.setAdapter(adapter);
         binding.paymentCycleSpi.setOnItemSelectedListener((view, position, id, item) -> {
-            selectedInsuranceType = paymentCycleList.get(position);
+            selectedPaymentCycle = paymentCycleList.get(position);
         });
 
     }
@@ -221,7 +265,7 @@ public class AddPolicyActivity extends AppCompatActivity {
         int day = c.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 activity,
-                (view, year1, monthOfYear, dayOfMonth) -> textView.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1), year, month, day);
+                (view, year1, monthOfYear, dayOfMonth) -> textView.setText((monthOfYear + 1) + "/" +dayOfMonth + "/" + year1), year, month, day);
         datePickerDialog.show();
     }
 }

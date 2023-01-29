@@ -31,6 +31,7 @@ import com.policyreminder.policyreminder.Models.UsersModel;
 import com.policyreminder.policyreminder.R;
 import com.policyreminder.policyreminder.Session.Session;
 import com.policyreminder.policyreminder.databinding.ActivityHomeBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,8 @@ public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
     boolean ishome = true;
     private HomeActivity activity;
-    private FirebaseDatabase database ;
-    private Session session ;
+    private FirebaseDatabase database;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 
         getProfileStatus();
         binding.icMenu.setOnClickListener(view -> binding.drawerLayout.open());
-
+        binding.userName.setText(session.getUser_name());
 
     }
 
@@ -89,13 +90,15 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private  void getProfileStatus(){
+    private void getProfileStatus() {
         database.getReference().child("users").child(session.getUserId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         UsersModel usersModel = snapshot.getValue(UsersModel.class);
                         session.setProfile_status(usersModel.getProfile_status());
+                        session.setUser_name(usersModel.getName());
+                        session.setProfileImage(usersModel.getProfile_image());
                     }
 
                     @Override
@@ -118,8 +121,13 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-       binding.navPolicyrLay.setOnClickListener(v -> {
-           startActivity(new Intent(activity, AddPolicyActivity.class));
+        binding.navPolicyrLay.setOnClickListener(v -> {
+            startActivity(new Intent(activity, AddPolicyActivity.class));
+            binding.drawerLayout.close();
+        });
+
+        binding.navHolderLay.setOnClickListener(v -> {
+            startActivity(new Intent(activity, AddPolicyHolderActivity.class));
             binding.drawerLayout.close();
         });
 
@@ -132,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private  void loadProfileDialog(){
+    private void loadProfileDialog() {
 
         final Dialog dialog = new Dialog(activity);
 
@@ -145,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
         ImageView cancel_button = dialog.findViewById(R.id.cancel_button);
         TextView complete_now = dialog.findViewById(R.id.complete_now);
 
-        complete_now.setOnClickListener(view -> startActivity(new Intent(activity,UserDetailsActivity.class)));
+        complete_now.setOnClickListener(view -> startActivity(new Intent(activity, UserDetailsActivity.class)));
 
         cancel_button.setOnClickListener(view -> dialog.dismiss());
 
@@ -161,9 +169,14 @@ public class HomeActivity extends AppCompatActivity {
         loadFrag(new HomeFragment());
 
         getProfileStatus();
-        Log.e("TAG", "onResume() called User Status "+session.getProfile_status());
-        if(session.getProfile_status().equalsIgnoreCase("0")){
+        Log.e("TAG", "onResume() called User Status " + session.getProfile_status());
+        if (session.getProfile_status().equalsIgnoreCase("0")) {
             loadProfileDialog();
+        }else {
+            Picasso.get().load(session.getProfileImage()).into(binding.profileImage);
         }
+
+        binding.userName.setText(session.getUser_name());
+
     }
 }

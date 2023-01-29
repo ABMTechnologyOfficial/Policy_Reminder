@@ -2,11 +2,12 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/coordinator"
     android:background="@color/color_primary"
-    tools:context=".Activities.AddPolicyActivity">
+    tools:context=".Activities.AddPolicyHolderActivity">
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -40,7 +41,7 @@
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/poppins_bold"
                     android:padding="@dimen/_2sdp"
-                    android:text="Add Policy"
+                    android:text="Add Holder"
                     android:textColor="@color/white"
                     android:textFontWeight="600"
                     android:textSize="@dimen/_16sdp" />
@@ -64,7 +65,7 @@
                     android:layout_gravity="start"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="@dimen/_2sdp"
-                    android:text="Select Insurance Type"
+                    android:text="Select Policy"
                     android:textColor="@color/white"
                     android:textFontWeight="600"
                     android:textSize="@dimen/_12sdp" />
@@ -79,43 +80,7 @@
                     android:padding="@dimen/_3sdp">
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/insurance_type_spi"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_2sdp"
-                        android:background="@color/black_light"
-                        android:backgroundTint="@color/black_light"
-                        android:textSize="@dimen/_10sdp"
-                        app:ms_background_color="@color/black"
-                        app:ms_padding_bottom="@dimen/_6sdp"
-                        app:ms_padding_top="@dimen/_3sdp"
-                        app:ms_text_color="@color/white" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="start"
-                    android:fontFamily="@font/poppins_regular"
-                    android:padding="@dimen/_2sdp"
-                    android:text="Select Company"
-                    android:textColor="@color/white"
-                    android:textFontWeight="600"
-                    android:textSize="@dimen/_12sdp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/edit_bg_dark"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_3sdp">
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/company_name_spi"
+                        android:id="@+id/policy_spi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_2sdp"
@@ -130,119 +95,58 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/policy_name"
+                    android:id="@+id/holder_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/edit_background"
-                    android:hint=" Policy Name"
+                    android:hint=" Holder Name"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/light_white" />
 
                 <EditText
-                    android:id="@+id/policy_ncb_vehicle"
+                    android:id="@+id/holder_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_background"
-                    android:hint=" Plan ,NCB , Vehicle number"
+                    android:hint=" Mobile Number"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/light_white" />
 
                 <EditText
-                    android:id="@+id/policy_sun_insured"
+                    android:id="@+id/holder_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_background"
-                    android:hint="Sum insured"
+                    android:hint="Age"
                     android:inputType="number"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/light_white" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:padding="@dimen/_2sdp"
-                    android:text="Select Payment Cycle"
-                    android:textColor="@color/white"
-                    android:textFontWeight="600"
-                    android:textSize="@dimen/_12sdp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/edit_bg_dark"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_3sdp">
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/payment_cycle_spi"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_2sdp"
-                        android:background="@color/black_light"
-                        android:backgroundTint="@color/black_light"
-                        android:textSize="@dimen/_10sdp"
-                        app:ms_background_color="@color/black"
-                        app:ms_padding_bottom="@dimen/_6sdp"
-                        app:ms_padding_top="@dimen/_3sdp"
-                        app:ms_text_color="@color/white" />
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/policy_premium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_background"
-                    android:hint="Premium"
-                    android:inputType="number"
-                    android:padding="@dimen/_10sdp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_white" />
-
-                <TextView
-                    android:id="@+id/policy_startdate"
+                    android:id="@+id/holder_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_background"
                     android:padding="@dimen/_10sdp"
-                    android:text="Start Date"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_white" />
-
-
-                <TextView
-                    android:id="@+id/policy_enddate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_background"
-                    android:padding="@dimen/_10sdp"
-                    android:text="End Date"
+                    android:text="DOB"
                     android:textColor="@color/white"
                     android:textColorHint="@color/light_white" />
 
                 <EditText
-                    android:id="@+id/policy_duration"
+                    android:id="@+id/holder_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_background"
-                    android:hint="Duration (In Year)"
-                    android:inputType="number"
+                    android:hint="Address"
+                    android:inputType="textPostalAddress"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/light_white" />
@@ -258,7 +162,7 @@
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/_12sdp"
-                    android:text="Add Policy"
+                    android:text="Add Holder"
                     android:textColor="@color/color_primary"
                     android:textFontWeight="700"
                     android:textSize="@dimen/_14sdp"

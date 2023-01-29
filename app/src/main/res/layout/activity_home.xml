@@ -104,8 +104,8 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profileImage"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_70sdp"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_60sdp"
                         android:paddingVertical="@dimen/_7sdp"
                         android:src="@drawable/profile"
                         android:tint="@color/white"
